@@ -95,7 +95,7 @@ public class MyStepdefs {
 
     @Then("I confirm account {string}")
     public void iConfirmAccount(String text) throws InterruptedException {
-        String actual = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/h5")).getText();
+        String actual = driver.findElement(By.cssSelector(".bold:nth-child(2)")).getText();
         String expected = text;
         assertEquals(expected, actual);
         Thread.sleep(1000);
@@ -113,23 +113,34 @@ public class MyStepdefs {
     public void iTickCodeOfEthicsNotTicked(String arg0) {
     }
 
+    @Then("I confirm account password dont match{string}")
+    public void iConfirmAccountPasswordDontMatch(String text) throws InterruptedException {
+        String actual = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[8]/div/div[2]/div[2]/div/span/span")).getText();
+        String expected = text;
+        assertEquals(expected, actual);
+        Thread.sleep(1000);
+
+    }
+
+    @Then("I confirm account no surname{string}")
+    public void iConfirmAccountNoSurname(String text) throws InterruptedException {
+        String actual = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[5]/div[2]/div/span/span")).getText();
+        String expected = text;
+        assertEquals(expected, actual);
+        Thread.sleep(1000);
+    }
+
+    @Then("I confirm account terms not valid {string}")
+    public void iConfirmAccountTermsNotValid(String text) throws InterruptedException {
+        String actual = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[11]/div/div[7]/span/span")).getText();
+        String expected = text;
+        assertEquals(expected, actual);
+        Thread.sleep(1000);
+    }
     @After
     public void closeTest() {
         System.out.println(" Test ends");
 
         driver.quit();
-    }
-
-    @Then("I confirm account password dont match{string}")
-    public void iConfirmAccountPasswordDontMatch(String arg0) {
-
-    }
-
-    @Then("I confirm account no surname{string}")
-    public void iConfirmAccountNoSurname(String arg0) {
-    }
-
-    @Then("I confirm account terms not valid {string}")
-    public void iConfirmAccountTermsNotValid(String arg0) {
     }
 }

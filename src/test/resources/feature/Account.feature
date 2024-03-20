@@ -5,8 +5,8 @@ Feature: Register Account
     Given I enter day of birth "11/11/1999"
     And I enter firstname "Kalle"
     And I enter lastname "Karlsson"
-    And I enter email "a3@asd.com"
-    And I confirm email "a3@asd.com"
+    And I enter email "a10@asd.com"
+    And I confirm email "a10@asd.com"
     And I enter password "password"
     And I confirm password "password"
     And I tick Account confirmation I have read "tick"
@@ -28,7 +28,7 @@ Feature: Register Account
     And I tick Account confirmation I am aged "tick"
     And I tick Code of ethics "tick"
     When I click Confirm and join "clickconfirm"
-    Then I confirm account no surname"nolastname"
+    Then I confirm account no surname"Last Name is required"
 
 
   Scenario: Enter account information password do not match
@@ -44,7 +44,7 @@ Feature: Register Account
     And I tick Account confirmation I am aged "tick"
     And I tick Code of ethics "tick"
     When I click Confirm and join "clickconfirm"
-    Then I confirm account password dont match"passworddonotmatch"
+    Then I confirm account password dont match"Confirm Password is required"
 
 
   Scenario: Enter account information terms not valid
@@ -60,5 +60,5 @@ Feature: Register Account
     And I tick Account confirmation I am aged "tick"
     And I tick Code of ethics Not ticked "tick"
     When I click Confirm and join ""
-    Then I confirm account terms not valid "termsnotvalid"
+    Then I confirm account terms not valid "You must confirm that you have read, understood and agree to the Code of Ethics and Conduct"
 
