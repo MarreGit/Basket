@@ -9,14 +9,12 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class MyStepdefs {
@@ -74,27 +72,23 @@ public class MyStepdefs {
     }
 
     @And("I tick Account confirmation I have read {string}")
-    public void iTickAccountConfirmationIHaveRead(String arg0) throws InterruptedException {
-        driver.findElement(By.cssSelector(".md-checkbox > .md-checkbox:nth-child(1) .box")).click();
-        Thread.sleep(1000);
+    public void iTickAccountConfirmationIHaveRead(String arg0) {
+        click(driver, By.cssSelector(".md-checkbox > .md-checkbox:nth-child(1) .box"));
     }
 
     @And("I tick Account confirmation I am aged {string}")
-    public void iTickAccountConfirmationIAmAged(String arg0) throws InterruptedException {
-        driver.findElement(By.cssSelector(".md-checkbox:nth-child(2) > label > .box")).click();
-        Thread.sleep(1000);
+    public void iTickAccountConfirmationIAmAged(String arg0) {
+        click(driver, By.cssSelector(".md-checkbox:nth-child(2) > label > .box"));
     }
 
     @And("I tick Code of ethics {string}")
-    public void iTickCodeOfEthics(String arg0) throws InterruptedException {
-        driver.findElement(By.cssSelector(".md-checkbox:nth-child(7) .box")).click();
-        Thread.sleep(1000);
+    public void iTickCodeOfEthics(String arg0) {
+        click(driver, By.cssSelector(".md-checkbox:nth-child(7) .box"));
     }
 
     @When("I click Confirm and join {string}")
-    public void iClickConfirmAndJoin(String arg0) throws InterruptedException {
-        driver.findElement(By.name("join")).click();
-        Thread.sleep(1000);
+    public void iClickConfirmAndJoin(String arg0) {
+        click(driver, By.name("join"));
     }
 
     @Then("I confirm account {string}")
@@ -141,16 +135,14 @@ public class MyStepdefs {
         assertEquals(expected, actual);
         Thread.sleep(1000);
     }
+    public static void click(WebDriver driver, By by) {
+        (new WebDriverWait(driver, Duration.ofSeconds(10))).until(ExpectedConditions.elementToBeClickable(by));
+        driver.findElement(by).click();
+    }
     @After
     public void closeTest() {
         System.out.println(" Test ends");
 
         driver.quit();
     }
-    public static void click(WebDriver driver, By by) {
-        (new WebDriverWait(driver, Duration.ofSeconds(10))).until(ExpectedConditions.elementToBeClickable(by));
-        driver.findElement(by).click();
-    }
-
-
 }
