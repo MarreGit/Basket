@@ -14,7 +14,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 

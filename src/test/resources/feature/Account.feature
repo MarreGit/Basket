@@ -5,8 +5,8 @@ Feature: Register Account
     Given I enter day of birth "11/11/1999"
     And I enter firstname "Kalle"
     And I enter lastname "Karlsson"
-    And I enter email "a39@asd.com"
-    And I confirm email "a39@asd.com"
+    And I enter email "a52@asd.com"
+    And I confirm email "a52@asd.com"
     And I enter password "password"
     And I confirm password "password"
     And I tick Account confirmation I have read "tick"
@@ -15,7 +15,7 @@ Feature: Register Account
     When I click Confirm and join "clickconfirm"
     Then I confirm account "Your Basketball England Membership Number is:"
 
-  Scenario: Enter account information no surname
+  Scenario: Enter account information no lastname
 
     Given I enter day of birth "11/11/1999"
     And I enter firstname "Kalle"
