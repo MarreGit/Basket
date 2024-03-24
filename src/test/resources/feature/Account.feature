@@ -1,12 +1,12 @@
 Feature: Register Account
 
   Scenario: Enter account information verified
-
+    Given I am using "edge" browser
     Given I enter day of birth "11/11/1999"
     And I enter firstname "Kalle"
     And I enter lastname "Karlsson"
-    And I enter email "a55@asd.com"
-    And I confirm email "a55@asd.com"
+    And I enter email "a90@asd.com"
+    And I confirm email "a90@asd.com"
     And I enter password "password"
     And I confirm password "password"
     And I tick Account confirmation I have read "tick"
@@ -17,6 +17,7 @@ Feature: Register Account
 
   Scenario: Enter account information no lastname
 
+    Given I am using "firefox" browser
     Given I enter day of birth "11/11/1999"
     And I enter firstname "Kalle"
     And I enter No lastname ""
@@ -33,6 +34,7 @@ Feature: Register Account
 
   Scenario: Enter account information password do not match
 
+    Given I am using "chrome" browser
     Given I enter day of birth "11/11/1999"
     And I enter firstname "Kalle"
     And I enter lastname "Karlsson"
@@ -49,6 +51,7 @@ Feature: Register Account
 
   Scenario: Enter account information terms not valid
 
+    Given I am using "chrome" browser
     Given I enter day of birth "11/11/1999"
     And I enter firstname "Kalle"
     And I enter lastname "Karlsson"

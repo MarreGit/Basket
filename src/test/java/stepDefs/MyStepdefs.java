@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,54 +23,53 @@ public class MyStepdefs {
 
     private WebDriver driver;
 
-    @Before
-    public void setUp() {
-        driver = new ChromeDriver();
+    @Given("I am using {string} browser")
+    public void iAmUsingBrowser(String browser) {
+        if (browser.equals("firefox")) {
+            driver = new FirefoxDriver();
+        } else if (browser.equals("edge")) {
+            driver = new EdgeDriver();
+        } else {
+            driver = new ChromeDriver();
+        }
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
         driver.manage().window().maximize();
     }
 
     @Given("I enter day of birth {string}")
-    public void iEnterDayOfBirth(String text) throws InterruptedException {
+    public void iEnterDayOfBirth(String text) {
         driver.findElement(By.id("dp")).sendKeys(text);
         driver.findElement(By.id("dp")).sendKeys(Keys.ENTER);
-        Thread.sleep(1000);
     }
 
     @And("I enter firstname {string}")
-    public void iEnterFirstname(String text) throws InterruptedException {
+    public void iEnterFirstname(String text) {
         driver.findElement(By.id("member_firstname")).sendKeys(text);
-        Thread.sleep(1000);
     }
 
     @And("I enter lastname {string}")
-    public void iEnterLastname(String text) throws InterruptedException {
+    public void iEnterLastname(String text) {
         driver.findElement(By.id("member_lastname")).sendKeys(text);
-        Thread.sleep(1000);
     }
 
     @And("I enter email {string}")
-    public void iEnterEmail(String text) throws InterruptedException {
+    public void iEnterEmail(String text) {
         driver.findElement(By.id("member_emailaddress")).sendKeys(text);
-        Thread.sleep(1000);
     }
 
     @And("I confirm email {string}")
-    public void iConfirmEmail(String text) throws InterruptedException {
+    public void iConfirmEmail(String text) {
         driver.findElement(By.id("member_confirmemailaddress")).sendKeys(text);
-        Thread.sleep(1000);
     }
 
     @And("I enter password {string}")
-    public void iEnterPassword(String text) throws InterruptedException {
+    public void iEnterPassword(String text) {
         driver.findElement(By.id("signupunlicenced_password")).sendKeys(text);
-        Thread.sleep(1000);
     }
 
     @And("I confirm password {string}")
-    public void iConfirmPassword(String text) throws InterruptedException {
+    public void iConfirmPassword(String text) {
         driver.findElement(By.id("signupunlicenced_confirmpassword")).sendKeys(text);
-        Thread.sleep(1000);
     }
 
     @And("I tick Account confirmation I have read {string}")
@@ -92,11 +93,10 @@ public class MyStepdefs {
     }
 
     @Then("I confirm account {string}")
-    public void iConfirmAccount(String text) throws InterruptedException {
+    public void iConfirmAccount(String text) {
         String actual = driver.findElement(By.cssSelector(".bold:nth-child(2)")).getText();
         String expected = text;
         assertEquals(expected, actual);
-        Thread.sleep(1000);
     }
 
     @And("I enter No lastname {string}")
@@ -112,33 +112,32 @@ public class MyStepdefs {
     }
 
     @Then("I confirm account password dont match{string}")
-    public void iConfirmAccountPasswordDontMatch(String text) throws InterruptedException {
+    public void iConfirmAccountPasswordDontMatch(String text) {
         String actual = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[8]/div/div[2]/div[2]/div/span/span")).getText();
         String expected = text;
         assertEquals(expected, actual);
-        Thread.sleep(1000);
 
     }
 
     @Then("I confirm account no surname{string}")
-    public void iConfirmAccountNoSurname(String text) throws InterruptedException {
+    public void iConfirmAccountNoSurname(String text) {
         String actual = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[5]/div[2]/div/span/span")).getText();
         String expected = text;
         assertEquals(expected, actual);
-        Thread.sleep(1000);
     }
 
     @Then("I confirm account terms not valid {string}")
-    public void iConfirmAccountTermsNotValid(String text) throws InterruptedException {
+    public void iConfirmAccountTermsNotValid(String text) {
         String actual = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[11]/div/div[7]/span/span")).getText();
         String expected = text;
         assertEquals(expected, actual);
-        Thread.sleep(1000);
     }
+
     public static void click(WebDriver driver, By by) {
         (new WebDriverWait(driver, Duration.ofSeconds(10))).until(ExpectedConditions.elementToBeClickable(by));
         driver.findElement(by).click();
     }
+
     @After
     public void closeTest() {
         System.out.println(" Test ends");
